@@ -4,7 +4,7 @@
 # WORK EXPERIENCE
 {% for job in experiences %}
 ## {{ job.company }} ({{ job.dates }})
-{{ job.titles | join(", ") -}}
+{{ job.titles | join(", ") -}}  
 {% for item in job.responsibilities %}
 * {{ item -}}
 {% endfor %}
