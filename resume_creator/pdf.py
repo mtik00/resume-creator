@@ -71,6 +71,9 @@ def experience(y: int, c: canvas.Canvas) -> int:
         c.setFont("Garamond Medium Italic", 12)
         c.drawString(x, y, ", ".join(job["titles"]))
 
+        string_width = c.stringWidth(job["location"], "Garamond Medium Italic", 12)
+        c.drawString(width - string_width, y, job["location"])
+
         c.setFont("Garamond", 12)
         y += 0.2 * inch
         stylesheet = getSampleStyleSheet()
