@@ -14,8 +14,6 @@ repos:
   rev: v2.39.1
   hooks:
     - id: commitizen
-    - id: commitizen-branch
-      stages: [push]
 - repo: https://github.com/PyCQA/flake8
   rev: 6.0.0
   hooks:
