@@ -2,5 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from . import main
+from .logger import init_logger
 
+init_logger()
 main()

@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
+
+from .settings import settings
+
+log = logging.getLogger(__name__)
 
 
 def main():
-    print("here!")
+    log.debug(settings.data)
 
 
 if __name__ == "__main__":
