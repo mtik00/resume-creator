@@ -15,6 +15,7 @@ log = logging.getLogger(__name__)
 
 class Settings:
     timezone: str = "America/Denver"
+    template_dir: Path = Path(__file__).parent / "templates"
 
     def __init__(self):
         self.data = None
