@@ -10,9 +10,13 @@
 {% endfor %}
 * Technologies: {{ job.technologies | join(", ") }}
 {% endfor %}
-
 # EDUCATION 
 {% for item in education %}
 * {{ item.school }} ({{ item.graduation_date }})  
 {{ item.degree }}
-{% endfor %}
+{%- endfor %}
+
+# SKILLS & INTERESTS
+
+* Skills: {{ skills | join(", ") }}
+* Interests: {{ interests | join(", ") }}
