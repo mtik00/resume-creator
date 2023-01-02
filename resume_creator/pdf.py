@@ -78,7 +78,14 @@ def experience(y: int, c: canvas.Canvas) -> int:
         y += 0.2 * inch
         stylesheet = getSampleStyleSheet()
         normalStyle = stylesheet["Normal"]
-        style = ParagraphStyle("bullets", normalStyle, bulletIndent=10, leftIndent=20)
+        style = ParagraphStyle(
+            "bullets",
+            normalStyle,
+            bulletIndent=10,
+            leftIndent=20,
+            fontName="Garamond",
+            fontSize=12,
+        )
         for item in job["responsibilities"]:
             p = Paragraph(text=item, style=style, bulletText="\u2022")
             p.wrapOn(c, width - 0.5 * inch, 0)
