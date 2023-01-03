@@ -177,14 +177,15 @@ def experience(y: int, c: canvas.Canvas) -> int:
             p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
             y += p.height + 0.05 * inch
 
-        technologies = (
-            "<font name='Garamond Bold' size=12>Technologies:</font> "
-            + ", ".join(job["technologies"])
-        )
-        p = Paragraph(text=technologies, style=PARAGRAPH_STYLE, bulletText="\u2022")
-        p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
-        p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
-        y += p.height + 0.05 * inch
+        if job["technologies"]:
+            technologies = (
+                "<font name='Garamond Bold' size=12>Technologies:</font> "
+                + ", ".join(job["technologies"])
+            )
+            p = Paragraph(text=technologies, style=PARAGRAPH_STYLE, bulletText="\u2022")
+            p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
+            p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
+            y += p.height + 0.05 * inch
 
         # Remove the last paragraph height to preserve some space between experiences.
         y -= p.height

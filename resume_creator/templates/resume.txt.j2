@@ -8,7 +8,9 @@ WORK EXPERIENCE
 {% for item in job.responsibilities %}
 * {{ item -}}
 {% endfor %}
+{%- if job.technologies %}
 * Technologies: {{ job.technologies | join(", ") }}
+{% endif %}
 {% endfor %}
 EDUCATION
 {% for item in education %}
