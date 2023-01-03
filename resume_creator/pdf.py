@@ -89,8 +89,12 @@ def section_header(y: int, c: canvas.Canvas, text: str):
 
 def skills_and_interests(y: int, c: canvas.Canvas) -> int:
     y = section_header(y, c, "SKILLS & INTERESTS")
-    skills = "Skills: " + ", ".join(settings.data["skills"])
-    interests = "Interests: " + ", ".join(settings.data["interests"])
+    skills = "<font name='Garamond Bold' size=12>Skills:</font> " + ", ".join(
+        settings.data["skills"]
+    )
+    interests = "<font name='Garamond Bold' size=12>Interests:</font> " + ", ".join(
+        settings.data["interests"]
+    )
 
     y += 0.25 * inch
 
