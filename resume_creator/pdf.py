@@ -75,7 +75,7 @@ def experience(y: int, c: canvas.Canvas) -> int:
         c.drawString(width - string_width, y, job["location"])
 
         c.setFont("Garamond", 12)
-        y += 0.2 * inch
+        y += 0.25 * inch
         stylesheet = getSampleStyleSheet()
         normalStyle = stylesheet["Normal"]
         style = ParagraphStyle(
@@ -90,7 +90,10 @@ def experience(y: int, c: canvas.Canvas) -> int:
             p = Paragraph(text=item, style=style, bulletText="\u2022")
             p.wrapOn(c, width - 0.5 * inch, 0)
             p.drawOn(c, x, y - p.height + 0.1 * inch)
-            y += p.height
+            y += p.height + 0.05 * inch
+
+        # Remove the last paragraph height to preserve some space between experiences.
+        y -= p.height
 
     return y
 
