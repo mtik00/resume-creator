@@ -44,13 +44,6 @@ def create_pdf():
 
     y += 0.25 * inch
 
-    y = section_header(y, c, "WORK EXPERIENCE")
-    # c.setFont("Garamond Bold", 12)
-    # c.drawString(0.05 * inch, y, "WORK EXPERIENCE")
-
-    y += 0.15 * inch
-    c.line(0 * inch, y, width, y)
-
     y = experience(y, c)
 
     c.save()
@@ -67,6 +60,8 @@ def section_header(y: int, c: canvas.Canvas, text: str):
 
 
 def experience(y: int, c: canvas.Canvas) -> int:
+    y = section_header(y, c, "WORK EXPERIENCE")
+
     x = 0.05 * inch
     y += 0.1 * inch
     for job in settings.data["experiences"]:
