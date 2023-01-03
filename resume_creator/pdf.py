@@ -31,6 +31,23 @@ def create_pdf():
     register_fonts()
     c = canvas.Canvas("resume.pdf", bottomup=0, pagesize=letter)
 
+    y = header(c) + 0.15 * inch
+
+    c.setLineWidth(1)
+    c.line(MARGIN, y, VISIBLE_WIDTH, y)
+
+    y += 0.25 * inch
+
+    y = experience(y, c) + SECTION_BREAK
+    y = education(y, c) + SECTION_BREAK
+    y = skills_and_interests(y, c) + SECTION_BREAK
+
+    footer(c)
+
+    c.save()
+
+
+def header(c: canvas.Canvas) -> int:
     c.setFont("Garamond Bold", 24)
     c.drawString(MARGIN - 0.05 * inch, MARGIN, settings.data["name"])
 
@@ -44,19 +61,7 @@ def create_pdf():
     p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, height)
     p.drawOn(c, MARGIN - 0.28 * inch, y)
 
-    y += 0.15 * inch
-    c.setLineWidth(1)
-    c.line(MARGIN, y, VISIBLE_WIDTH, y)
-
-    y += 0.25 * inch
-
-    y = experience(y, c) + SECTION_BREAK
-    y = education(y, c) + SECTION_BREAK
-    y = skills_and_interests(y, c) + SECTION_BREAK
-
-    footer(c)
-
-    c.save()
+    return y
 
 
 def register_fonts():
