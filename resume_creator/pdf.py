@@ -51,6 +51,8 @@ def create_pdf():
     y = education(y, c) + SECTION_BREAK
     y = skills_and_interests(y, c) + SECTION_BREAK
 
+    footer(c)
+
     c.save()
 
 
@@ -63,6 +65,16 @@ def register_fonts():
     pdfmetrics.registerFont(
         TTFont("Garamond Medium Italic", fonts_dir / "EBGaramond-Italic.ttf")
     )
+
+
+def footer(c: canvas.Canvas):
+    line = settings.data["linkedin"]
+
+    c.setFont("Garamond", 12)
+    string_width = c.stringWidth(line, "Garamond", 12)
+
+    x = (VISIBLE_WIDTH / 2) - (string_width / 2)
+    c.drawString(x, height - MARGIN, line)
 
 
 def section_header(y: int, c: canvas.Canvas, text: str):
