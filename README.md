@@ -12,6 +12,8 @@ Save this `json` to `./.secrets/data.json`.
 
 <details>
     <summary>Sample data</summary>
+
+### Sample json
 ```json
 {
     "name": "Jobby McJobface",
