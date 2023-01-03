@@ -28,15 +28,7 @@ PARAGRAPH_STYLE = ParagraphStyle(
 
 
 def create_pdf():
-    fonts_dir = Path(__file__).parent / "fonts"
-    pdfmetrics.registerFont(TTFont("Garamond", fonts_dir / "EBGaramond-Regular.ttf"))
-    pdfmetrics.registerFont(
-        TTFont("Garamond Bold", fonts_dir / "EBGaramond-SemiBold.ttf")
-    )
-    pdfmetrics.registerFont(
-        TTFont("Garamond Medium Italic", fonts_dir / "EBGaramond-Italic.ttf")
-    )
-
+    register_fonts()
     c = canvas.Canvas("resume.pdf", bottomup=0, pagesize=letter)
 
     y = MARGIN
@@ -60,6 +52,17 @@ def create_pdf():
     y = skills_and_interests(y, c) + SECTION_BREAK
 
     c.save()
+
+
+def register_fonts():
+    fonts_dir = Path(__file__).parent / "fonts"
+    pdfmetrics.registerFont(TTFont("Garamond", fonts_dir / "EBGaramond-Regular.ttf"))
+    pdfmetrics.registerFont(
+        TTFont("Garamond Bold", fonts_dir / "EBGaramond-SemiBold.ttf")
+    )
+    pdfmetrics.registerFont(
+        TTFont("Garamond Medium Italic", fonts_dir / "EBGaramond-Italic.ttf")
+    )
 
 
 def section_header(y: int, c: canvas.Canvas, text: str):
