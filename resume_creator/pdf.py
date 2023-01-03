@@ -27,9 +27,13 @@ PARAGRAPH_STYLE = ParagraphStyle(
 )
 
 
-def create_pdf():
+def create_pdf(output_file: Path = settings.out_dir / "resume.pdf"):
     register_fonts()
-    c = canvas.Canvas("resume.pdf", bottomup=0, pagesize=letter)
+
+    if not output_file.parent.exists():
+        output_file.parent.mkdir(parents=True)
+
+    c = canvas.Canvas(str(output_file), bottomup=0, pagesize=letter)
 
     y = header(c) + 0.15 * inch
 
