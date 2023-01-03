@@ -16,7 +16,6 @@ width, height = letter
 
 MARGIN = 0.5 * inch
 SECTION_BREAK = 0.5 * inch
-LEFT_SIDE = 0.5 * inch
 VISIBLE_WIDTH = width - MARGIN
 
 
@@ -34,17 +33,17 @@ def create_pdf():
 
     y = MARGIN
     c.setFont("Garamond Bold", 24)
-    c.drawString(LEFT_SIDE, y, settings.data["name"])
+    c.drawString(MARGIN, y, settings.data["name"])
 
     c.setFont("Garamond", 16)
     data = settings.data
     line = f"{data['email']} \u2022 {data['phone']} \u2022 {data['location']}"
-    y += 0.25 * inch
-    c.drawString(LEFT_SIDE, y, line)
+    y += 0.3 * inch
+    c.drawString(MARGIN, y, line)
 
     y += 0.15 * inch
     c.setLineWidth(1)
-    c.line(LEFT_SIDE, y, VISIBLE_WIDTH, y)
+    c.line(MARGIN, y, VISIBLE_WIDTH, y)
 
     y += 0.25 * inch
 
@@ -57,10 +56,10 @@ def create_pdf():
 
 def section_header(y: int, c: canvas.Canvas, text: str):
     c.setFont("Garamond Bold", 12)
-    c.drawString(LEFT_SIDE, y, text)
+    c.drawString(MARGIN, y, text)
 
     y += 0.15 * inch
-    c.line(LEFT_SIDE, y, VISIBLE_WIDTH, y)
+    c.line(MARGIN, y, VISIBLE_WIDTH, y)
 
     return y
 
@@ -70,7 +69,6 @@ def skills_and_interests(y: int, c: canvas.Canvas) -> int:
     skills = "Skills: " + ", ".join(settings.data["skills"])
     interests = "Interests: " + ", ".join(settings.data["interests"])
 
-    c.setFont("Garamond", 12)
     y += 0.25 * inch
     stylesheet = getSampleStyleSheet()
     normalStyle = stylesheet["Normal"]
@@ -84,12 +82,12 @@ def skills_and_interests(y: int, c: canvas.Canvas) -> int:
     )
     p = Paragraph(text=skills, style=style, bulletText="\u2022")
     p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
-    p.drawOn(c, LEFT_SIDE, y - p.height + 0.1 * inch)
+    p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
     y += p.height + 0.05 * inch
 
     p = Paragraph(text=interests, style=style, bulletText="\u2022")
     p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
-    p.drawOn(c, LEFT_SIDE, y - p.height + 0.1 * inch)
+    p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
     y += p.height + 0.05 * inch
 
     return y
@@ -101,19 +99,22 @@ def education(y: int, c: canvas.Canvas) -> int:
     y += 0.2 * inch
     for item in settings.data["education"]:
         c.setFont("Garamond Bold", 12)
-        c.drawString(LEFT_SIDE, y, item["school"])
+        c.drawString(MARGIN, y, item["school"])
 
         string_width = c.stringWidth(item["graduation_date"], "Garamond Bold", 12)
         c.drawString(VISIBLE_WIDTH - string_width, y, item["graduation_date"])
 
         y += 0.2 * inch
         c.setFont("Garamond Medium Italic", 12)
-        c.drawString(LEFT_SIDE, y, item["degree"])
+        c.drawString(MARGIN, y, item["degree"])
 
         string_width = c.stringWidth(item["location"], "Garamond Medium Italic", 12)
         c.drawString(VISIBLE_WIDTH - string_width, y, item["location"])
 
         y += 0.4 * inch
+
+    # Remove the last height spacing to preserve some space between experiences.
+    y -= 0.4 * inch
 
     return y
 
@@ -124,7 +125,7 @@ def experience(y: int, c: canvas.Canvas) -> int:
     for job in settings.data["experiences"]:
         y += 0.2 * inch
         c.setFont("Garamond Bold", 12)
-        c.drawString(LEFT_SIDE, y, job["company"])
+        c.drawString(MARGIN, y, job["company"])
 
         string_width = c.stringWidth(job["dates"], "Garamond Bold", 12)
 
@@ -132,7 +133,7 @@ def experience(y: int, c: canvas.Canvas) -> int:
 
         y += 0.2 * inch
         c.setFont("Garamond Medium Italic", 12)
-        c.drawString(LEFT_SIDE, y, ", ".join(job["titles"]))
+        c.drawString(MARGIN, y, ", ".join(job["titles"]))
 
         string_width = c.stringWidth(job["location"], "Garamond Medium Italic", 12)
         c.drawString(VISIBLE_WIDTH - string_width, y, job["location"])
@@ -144,7 +145,7 @@ def experience(y: int, c: canvas.Canvas) -> int:
         style = ParagraphStyle(
             "bullets",
             normalStyle,
-            bulletIndent=10,
+            bulletIndent=0,
             leftIndent=20,
             fontName="Garamond",
             fontSize=12,
@@ -152,7 +153,7 @@ def experience(y: int, c: canvas.Canvas) -> int:
         for item in job["responsibilities"]:
             p = Paragraph(text=item, style=style, bulletText="\u2022")
             p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
-            p.drawOn(c, LEFT_SIDE, y - p.height + 0.1 * inch)
+            p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
             y += p.height + 0.05 * inch
 
         # Remove the last paragraph height to preserve some space between experiences.
