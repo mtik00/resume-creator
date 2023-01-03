@@ -3,19 +3,19 @@
 from pathlib import Path
 
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus.paragraph import Paragraph
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
 from .settings import settings
 
+width, height = letter
+
 
 def create_pdf():
-    width, height = letter  # keep for later
-
     fonts_dir = Path(__file__).parent / "fonts"
     pdfmetrics.registerFont(TTFont("Garamond", fonts_dir / "EBGaramond-Regular.ttf"))
     pdfmetrics.registerFont(
@@ -43,8 +43,10 @@ def create_pdf():
     c.line(0 * inch, y, width, y)
 
     y += 0.25 * inch
-    c.setFont("Garamond Bold", 12)
-    c.drawString(0.05 * inch, y, "WORK EXPERIENCE")
+
+    y = section_header(y, c, "WORK EXPERIENCE")
+    # c.setFont("Garamond Bold", 12)
+    # c.drawString(0.05 * inch, y, "WORK EXPERIENCE")
 
     y += 0.15 * inch
     c.line(0 * inch, y, width, y)
@@ -54,8 +56,17 @@ def create_pdf():
     c.save()
 
 
+def section_header(y: int, c: canvas.Canvas, text: str):
+    c.setFont("Garamond Bold", 12)
+    c.drawString(0.05 * inch, y, "WORK EXPERIENCE")
+
+    y += 0.15 * inch
+    c.line(0 * inch, y, width, y)
+
+    return y
+
+
 def experience(y: int, c: canvas.Canvas) -> int:
-    width, height = letter
     x = 0.05 * inch
     y += 0.1 * inch
     for job in settings.data["experiences"]:
