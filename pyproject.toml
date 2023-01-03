@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "resume-creator"
-version = "1.0.0"
+version = "1.0.1"
 description = ""
 authors = ["Tim McFadden <mtik00@users.noreply.github.com>"]
 readme = "README.md"
@@ -29,7 +29,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.0.0"
+version = "1.0.1"
 version_files = [
     "pyproject.toml:version"
 ]
