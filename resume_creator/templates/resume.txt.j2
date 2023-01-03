@@ -1,0 +1,24 @@
+{{ name }}
+{{ email }} | {{ phone }} | {{ location }}
+
+WORK EXPERIENCE
+{% for job in experiences %}
+{{ job.company }} ({{ job.dates }})
+{{ job.titles | join(", ") -}}
+{% for item in job.responsibilities %}
+* {{ item -}}
+{% endfor %}
+* Technologies: {{ job.technologies | join(", ") }}
+{% endfor %}
+EDUCATION
+{% for item in education %}
+* {{ item.school }} ({{ item.graduation_date }})
+{{ item.degree }}
+{%- endfor %}
+
+SKILLS & INTERESTS
+
+* Skills: {{ skills | join(", ") }}
+* Interests: {{ interests | join(", ") }}
+
+{{ linkedin }}

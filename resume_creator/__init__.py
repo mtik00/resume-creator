@@ -2,18 +2,17 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from .settings import settings
 from .markdown import create_markdown
 from .pdf import create_pdf
-
+from .text import create_text
 
 log = logging.getLogger(__name__)
 
 
 def main():
-    log.debug(settings.data)
     create_markdown()
     create_pdf()
+    create_text()
 
 
 if __name__ == "__main__":
