@@ -4,15 +4,26 @@ import logging
 
 from .markdown import create_markdown
 from .pdf import create_pdf
+from .settings import settings
 from .text import create_text
 
 log = logging.getLogger(__name__)
 
 
 def main():
-    create_markdown()
-    create_pdf()
-    create_text()
+    partial_path = f"{settings.data['name']} Resume"
+
+    path = settings.out_dir / f"{partial_path}.md"
+    create_markdown(path)
+    log.info("%s created", path)
+
+    path = settings.out_dir / f"{partial_path}.pdf"
+    create_pdf(path)
+    log.info("%s created", path)
+
+    path = settings.out_dir / f"{partial_path}.txt"
+    create_text(path)
+    log.info("%s created", path)
 
 
 if __name__ == "__main__":
