@@ -31,15 +31,18 @@ def create_pdf():
     register_fonts()
     c = canvas.Canvas("resume.pdf", bottomup=0, pagesize=letter)
 
-    y = MARGIN
     c.setFont("Garamond Bold", 24)
-    c.drawString(MARGIN, y, settings.data["name"])
+    c.drawString(MARGIN - 0.05 * inch, MARGIN, settings.data["name"])
 
     c.setFont("Garamond", 16)
     data = settings.data
-    line = f"{data['email']} \u2022 {data['phone']} \u2022 {data['location']}"
-    y += 0.3 * inch
-    c.drawString(MARGIN, y, line)
+    line = f"<font name='Courier' size=12>{data['email']}</font> \u2022 {data['phone']} \u2022 {data['location']}"
+
+    y = MARGIN + 0.3 * inch
+
+    p = Paragraph(text=line, style=PARAGRAPH_STYLE)
+    p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, height)
+    p.drawOn(c, MARGIN - 0.28 * inch, y)
 
     y += 0.15 * inch
     c.setLineWidth(1)
