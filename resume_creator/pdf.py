@@ -17,6 +17,14 @@ width, height = letter
 MARGIN = 0.5 * inch
 SECTION_BREAK = 0.5 * inch
 VISIBLE_WIDTH = width - MARGIN
+PARAGRAPH_STYLE = ParagraphStyle(
+    "bullets",
+    getSampleStyleSheet()["Normal"],
+    bulletIndent=0,
+    leftIndent=20,
+    fontName="Garamond",
+    fontSize=12,
+)
 
 
 def create_pdf():
@@ -70,22 +78,13 @@ def skills_and_interests(y: int, c: canvas.Canvas) -> int:
     interests = "Interests: " + ", ".join(settings.data["interests"])
 
     y += 0.25 * inch
-    stylesheet = getSampleStyleSheet()
-    normalStyle = stylesheet["Normal"]
-    style = ParagraphStyle(
-        "bullets",
-        normalStyle,
-        bulletIndent=0,
-        leftIndent=20,
-        fontName="Garamond",
-        fontSize=12,
-    )
-    p = Paragraph(text=skills, style=style, bulletText="\u2022")
+
+    p = Paragraph(text=skills, style=PARAGRAPH_STYLE, bulletText="\u2022")
     p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
     p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
     y += p.height + 0.05 * inch
 
-    p = Paragraph(text=interests, style=style, bulletText="\u2022")
+    p = Paragraph(text=interests, style=PARAGRAPH_STYLE, bulletText="\u2022")
     p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
     p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
     y += p.height + 0.05 * inch
@@ -140,18 +139,9 @@ def experience(y: int, c: canvas.Canvas) -> int:
 
         c.setFont("Garamond", 12)
         y += 0.25 * inch
-        stylesheet = getSampleStyleSheet()
-        normalStyle = stylesheet["Normal"]
-        style = ParagraphStyle(
-            "bullets",
-            normalStyle,
-            bulletIndent=0,
-            leftIndent=20,
-            fontName="Garamond",
-            fontSize=12,
-        )
+
         for item in job["responsibilities"]:
-            p = Paragraph(text=item, style=style, bulletText="\u2022")
+            p = Paragraph(text=item, style=PARAGRAPH_STYLE, bulletText="\u2022")
             p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
             p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
             y += p.height + 0.05 * inch
