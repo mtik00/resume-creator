@@ -17,7 +17,7 @@ class Settings:
     timezone: str = "America/Denver"
     template_dir: Path = Path(__file__).parent / "templates"
     out_dir: Path = Path(os.getenv("OUTDIR", Path(__file__).parent.parent / "output"))
-    data: dict = None
+    data: dict = {}
 
     def __init__(self):
         datafile = os.getenv("DATAFILE", "")
