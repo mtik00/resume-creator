@@ -13,6 +13,8 @@ log = logging.getLogger(__name__)
 def main():
     partial_path = f"{settings.data['name']} Resume"
 
+    settings.out_dir.mkdir(parents=True, exist_ok=True)
+
     path = settings.out_dir / f"{partial_path}.md"
     create_markdown(path)
     log.info("%s created", path)

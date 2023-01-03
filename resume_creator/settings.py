@@ -30,7 +30,8 @@ class Settings:
                 datafile.parent.mkdir(mode=0o700, exist_ok=True)
                 datafile.write_text("{}")
         else:
-            log.warning("No DATAFILE env var exists")
+            log.error("No DATAFILE env var exists")
+            raise ValueError("use DATAFILE env var")
 
 
 settings = Settings()
