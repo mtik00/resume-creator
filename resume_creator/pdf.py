@@ -15,7 +15,7 @@ from .settings import settings
 width, height = letter
 
 MARGIN = 0.5 * inch
-SECTION_BREAK = 0.5 * inch
+SECTION_BREAK = 0.3 * inch
 VISIBLE_WIDTH = width - MARGIN
 PARAGRAPH_STYLE = ParagraphStyle(
     "bullets",
@@ -53,7 +53,7 @@ def header(c: canvas.Canvas) -> int:
 
     c.setFont("Garamond", 16)
     data = settings.data
-    line = f"<font name='Courier' size=12>{data['email']}</font> \u2022 {data['phone']} \u2022 {data['location']}"
+    line = f"<font name='Courier' size=12>{data['email']}</font> \u00BB {data['phone']} \u00BB {data['location']}"
 
     y = MARGIN + 0.3 * inch
 
@@ -172,6 +172,15 @@ def experience(y: int, c: canvas.Canvas) -> int:
             p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
             p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
             y += p.height + 0.05 * inch
+
+        technologies = (
+            "<font name='Garamond Bold' size=12>Technologies:</font> "
+            + ", ".join(job["technologies"])
+        )
+        p = Paragraph(text=technologies, style=PARAGRAPH_STYLE, bulletText="\u2022")
+        p.wrapOn(c, VISIBLE_WIDTH - 0.5 * inch, 0)
+        p.drawOn(c, MARGIN, y - p.height + 0.1 * inch)
+        y += p.height + 0.05 * inch
 
         # Remove the last paragraph height to preserve some space between experiences.
         y -= p.height
