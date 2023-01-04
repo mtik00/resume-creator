@@ -4,6 +4,30 @@ This project was inspired by [this classic Reddit post](https://www.reddit.com/r
 
 Kudos to Colin at [Sheets & Giggles](https://sheetsgiggles.com).
 
+This package will generate `pdf`, `md`, and `txt` versions of the supplied data.
+
+## Usage
+
+Your best bet is to look at the sample `json` data below and play with generating
+the resume formats.
+
+The most glaring issue you are most likely going to run into is overflowing the
+PDF into another page.  This code doesn't check for that, nor does it support
+multi-page PDFs.  You will probably need to play around with your supplied data
+in order to properly format the PDF.
+
+Once you have created your data, run the package like so:
+```shell
+python -m resume_creator
+```
+
+## Installation
+
+1. Clone the repository
+1. Create and activate a virtual environment
+1. Install poetry: `python -m pip install --upgrade pip poetry`
+1. Install the package: `poetry install --no-dev`
+
 ## Sample Data
 
 The sample data below pretty closely matches the data in the original Google Document.
