@@ -139,7 +139,7 @@ Save this `json` to `./.secrets/data.json`.
             ],
             "responsibilities": [
                 "Core responsibility #1.",
-                "Core responsibility #2.",
+                "Core responsibility #2."
             ],
             "technologies": [
             ]
@@ -169,7 +169,7 @@ Save this `json` to `./.secrets/data.json`.
             ],
             "technologies": [
             ]
-        },
+        }
     ],
     "education": [
         {
@@ -180,5 +180,6 @@ Save this `json` to `./.secrets/data.json`.
         }
     ]
 }
+
 ```
 </details>
